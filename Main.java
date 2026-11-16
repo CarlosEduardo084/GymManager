@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 import java.time.LocalDate;
 
@@ -6,20 +7,22 @@ public class Main {
     public static void main(String[] args) {
         Scanner entrada = new Scanner(System.in);
 
-    Aluno aluno = new Aluno(
-        1,
-        "Ana",
-        "11111111111",
-        "1234",
-        LocalDate.of(2005, 8, 15),
-        "84999999999"
-    );
+        Aluno aluno = new Aluno(
+            1,
+            "Ana",
+            "11111111111",
+            "1234",
+            LocalDate.of(2005, 8, 15),
+            "84999999999"
+        );
 
         Instrutor instrutor = new Instrutor(
             1,
             "Carlos",
             "22222222222",
             "5678",
+            "123456-G/RN",
+            "Manha",
             true
         );
 
@@ -30,7 +33,7 @@ public class Main {
             System.out.println("1 - Entrar como aluno");
             System.out.println("2 - Entrar como instrutor");
             System.out.println("0 - Sair");
-            System.out.print("Escolha uma op��o: ");
+            System.out.print("Escolha uma opcao: ");
 
             opcao = entrada.nextLine();
 
@@ -48,7 +51,7 @@ public class Main {
                     break;
 
                 default:
-                    System.out.println("Op��o inv�lida.");
+                    System.out.println("Opcao invalida.");
             }
         }
 
@@ -67,10 +70,22 @@ public class Main {
             return;
         }
 
+        if (usuario.autenticar(cpf, senha)) {
+            System.out.println(
+                "Login realizado! Bem-vindo(a), " + usuario.getNome()
+            );
+
             if (usuario instanceof Aluno) {
-        Aluno aluno = (Aluno) usuario;
-        System.out.println(aluno.consultarDados());
-    } else {
+                Aluno aluno = (Aluno) usuario;
+                System.out.println(aluno.consultarDados());
+            }
+
+            if (usuario instanceof Instrutor) {
+                Instrutor instrutor = (Instrutor) usuario;
+                System.out.println(instrutor.consultarDados());
+            }
+
+        } else {
             System.out.println("CPF ou senha incorretos.");
         }
     }
